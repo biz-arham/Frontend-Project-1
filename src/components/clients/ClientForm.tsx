@@ -27,7 +27,7 @@ import { cn } from '@/lib/utils';
 
 const clientSchema = z.object({
   fullName: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
+  email: z.string().email('Invalid email address').optional().or(z.literal('')),
   phone: z.string().optional(),
   upworkProfileUrl: z.string().url().optional().or(z.literal('')),
   companyName: z.string().optional(),
@@ -113,7 +113,7 @@ export function ClientForm({ open, onOpenChange, client, onSubmit }: ClientFormP
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email *</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input type="email" placeholder="john@example.com" {...field} />
                     </FormControl>
